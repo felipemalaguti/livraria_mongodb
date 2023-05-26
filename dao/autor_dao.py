@@ -51,10 +51,10 @@ class AutorDAO:
         aut = None
         conexao = self.__conexao_factory.get_conexao()
         cursor = conexao.cursor()
-        cursor.execute("SELECT id, nome FROM autores WHERE id = %s", (autor_id,))
+        cursor.execute("SELECT id, nome, email, telefone, bio FROM autores WHERE id = %s", (autor_id,))
         resultado = cursor.fetchone()
         if (resultado):
-            aut = Autor(resultado[1])
+            aut = Autor(resultado[1], resultado[2], resultado[3], resultado[4])
             aut.id = resultado[0]
         cursor.close()
         conexao.close()
